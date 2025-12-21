@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alejandra Bárcena - Vaporwave Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Audiowide&family=Electrolize:wght@400&display=swap");
+
+      :root {
+        --neon-pink: #ff006e;
+        --neon-cyan: #00f5ff;
+        --neon-purple: #8338ec;
+        --neon-yellow: #ffbe0b;
+        --dark-bg: #0f0f23;
+        --darker-bg: #06061a;
+      }
+
+      body {
+        font-family: "Electrolize", sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--dark-bg) 0%,
+          var(--darker-bg) 100%
+        );
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      .vaporwave-title {
+        font-family: "Audiowide", cursive;
+      }
+
+      .retro-font {
+        font-family: "Orbitron", monospace;
+      }
+
+      .neon-glow {
+        text-shadow: 0 0 2px currentColor, 0 0 4px currentColor;
+      }
+
+      .neon-box {
+        box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan),
+          0 0 30px var(--neon-cyan), inset 0 0 10px rgba(0, 245, 255, 0.1);
+      }
+
+      .retro-grid {
+        background-image: linear-gradient(
+            rgba(255, 0, 110, 0.3) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 0, 110, 0.3) 1px, transparent 1px);
+        background-size: 40px 40px;
+        animation: grid-move 20s linear infinite;
+      }
+
+      @keyframes grid-move {
+        0% {
+          background-position: 0 0;
+        }
+
+        100% {
+          background-position: 40px 40px;
+        }
+      }
+
+      .vaporwave-gradient {
+        background: linear-gradient(
+          45deg,
+          var(--neon-pink) 0%,
+          var(--neon-purple) 25%,
+          var(--neon-cyan) 50%,
+          var(--neon-yellow) 75%,
+          var(--neon-pink) 100%
+        );
+        background-size: 400% 400%;
+        animation: gradient-shift 8s ease infinite;
+      }
+
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .retro-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 0, 110, 0.1) 0%,
+          rgba(131, 56, 236, 0.1) 50%,
+          rgba(0, 245, 255, 0.1) 100%
+        );
+        border: 2px solid;
+        border-image: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan))
+          1;
+        backdrop-filter: blur(10px);
+      }
+
+      .floating-shapes {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .shape {
+        position: absolute;
+        opacity: 0.1;
+        animation: float 15s infinite linear;
+      }
+
+      .triangle {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 35px solid var(--neon-pink);
+      }
+
+      .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--neon-cyan);
+      }
+
+      .square {
+        width: 25px;
+        height: 25px;
+        background: var(--neon-purple);
+        transform: rotate(45deg);
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+
+        10% {
+          opacity: 0.1;
+        }
+
+        90% {
+          opacity: 0.1;
+        }
+
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .pulse-neon {
+        animation: pulse-neon 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes pulse-neon {
+        from {
+          box-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink),
+            0 0 40px var(--neon-pink);
+        }
+
+        to {
+          box-shadow: 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink),
+            0 0 50px var(--neon-pink);
+        }
+      }
+
+      .retro-button {
+        background: linear-gradient(
+          45deg,
+          var(--neon-pink),
+          var(--neon-purple)
+        );
+        border: 2px solid var(--neon-cyan);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .retro-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .retro-button:hover::before {
+        left: 100%;
+      }
+
+      .retro-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 0, 110, 0.5);
+      }
+
+      .skill-bar {
+        background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+        height: 8px;
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-bar::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: skill-shine 2s infinite;
+      }
+
+      @keyframes skill-shine {
+        0% {
+          transform: translateX(-100%);
+        }
+
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .vaporwave-text {
+        background: linear-gradient(
+          45deg,
+          var(--neon-pink),
+          var(--neon-cyan),
+          var(--neon-yellow)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .retro-nav {
+        backdrop-filter: blur(20px);
+        background: rgba(15, 15, 35, 0.8);
+        border-bottom: 2px solid var(--neon-cyan);
+      }
+
+      .scanlines {
+        position: relative;
+      }
+
+      .scanlines::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 245, 255, 0.03) 2px,
+          rgba(0, 245, 255, 0.03) 4px
+        );
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Floating Shapes -->
+    <div class="floating-shapes" id="floating-shapes"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 retro-nav">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 vaporwave-gradient rounded-full flex items-center justify-center neon-glow"
+            >
+              <span class="text-black font-bold retro-font">AB</span>
+            </div>
+            <div>
+              <div
+                class="vaporwave-title text-lg neon-glow"
+                style="color: var(--neon-pink)"
+              >
+                ALEJANDRA
+              </div>
+              <div class="text-xs retro-font" style="color: var(--neon-cyan)">
+                VAPORWAVE_DEV
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex space-x-6 retro-font text-sm">
+            <a
+              href="#about"
+              class="neon-glow hover:text-pink-400 transition-colors"
+              style="color: var(--neon-cyan)"
+              >[ABOUT]</a
+            >
+            <a
+              href="#skills"
+              class="neon-glow hover:text-pink-400 transition-colors"
+              style="color: var(--neon-cyan)"
+              >[SKILLS]</a
+            >
+            <a
+              href="#experience"
+              class="neon-glow hover:text-pink-400 transition-colors"
+              style="color: var(--neon-cyan)"
+              >[EXP]</a
+            >
+            <a
+              href="#projects"
+              class="neon-glow hover:text-pink-400 transition-colors"
+              style="color: var(--neon-cyan)"
+              >[PROJ]</a
+            >
+            <a
+              href="#contact"
+              class="neon-glow hover:text-pink-400 transition-colors"
+              style="color: var(--neon-cyan)"
+              >[CONTACT]</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen flex items-center justify-center retro-grid relative pt-20"
+    >
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <div class="mb-8">
+          <h1
+            class="text-6xl md:text-8xl font-bold mb-4 vaporwave-title neon-glow"
+            style="color: var(--neon-pink)"
+          >
+            ALEJANDRA
+          </h1>
+          <h2
+            class="text-4xl md:text-6xl font-bold mb-6 vaporwave-title neon-glow"
+            style="color: var(--neon-pink)"
+          >
+            BÁRCENA
+          </h2>
+        </div>
+
+        <div
+          class="text-xl md:text-2xl mb-8 retro-font neon-glow"
+          style="color: var(--neon-cyan)"
+        >
+          FULL STACK DEVELOPER • 3D DIGITAL ARTIST • BLENDER SPECIALIST
+        </div>
+
+        <div class="max-w-2xl mx-auto mb-12">
+          <p class="text-lg leading-relaxed" style="color: #b8b8ff">
+            Creando experiencias digitales con
+            <span class="vaporwave-text font-bold">10+ años</span>
+            de experiencia en el ciberespacio. Especializada en
+            <span class="neon-glow" style="color: var(--neon-pink)">Python</span
+            >,
+            <span class="neon-glow" style="color: var(--neon-cyan)">Java</span>
+            y
+            <span class="neon-glow" style="color: var(--neon-yellow)"
+              >React</span
+            >.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <button
+            class="retro-button px-8 py-4 rounded-lg font-bold retro-font text-white"
+          >
+            🚀 EXPLORAR PROYECTOS
+          </button>
+          <button
+            class="retro-button px-8 py-4 rounded-lg font-bold retro-font text-white"
+          >
+            💫 CONTACTAR
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 scanlines">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-bold text-center mb-12 vaporwave-title neon-glow vaporwave-text"
+        >
+          ABOUT.EXE
+        </h2>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="retro-card p-8 rounded-xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p class="text-lg leading-relaxed mb-6" style="color: #e0e0ff">
+                  Desarrolladora Full Stack con una perspectiva única que
+                  fusiona
+                  <span class="neon-glow" style="color: var(--neon-pink)"
+                    >tecnología</span
+                  >,
+                  <span class="neon-glow" style="color: var(--neon-cyan)"
+                    >arte digital 3D</span
+                  >
+                  y
+                  <span class="neon-glow" style="color: var(--neon-purple)"
+                    >Blender</span
+                  >. Mi experiencia abarca sectores privados, gubernamentales y
+                  organizaciones sociales.
+                </p>
+                <p class="text-lg leading-relaxed" style="color: #e0e0ff">
+                  Creo soluciones que priorizan la
+                  <span class="neon-glow" style="color: var(--neon-yellow)"
+                    >accesibilidad</span
+                  >,
+                  <span class="neon-glow" style="color: var(--neon-purple)"
+                    >diversidad</span
+                  >
+                  y
+                  <span class="neon-glow" style="color: var(--neon-pink)"
+                    >mejores prácticas</span
+                  >.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="retro-card p-4 text-center pulse-neon">
+                  <div class="text-3xl mb-2">🎯</div>
+                  <div
+                    class="retro-font text-sm neon-glow"
+                    style="color: var(--neon-cyan)"
+                  >
+                    ENFOQUE
+                  </div>
+                  <div class="text-xs" style="color: #b8b8ff">
+                    Soluciones funcionales
+                  </div>
+                </div>
+                <div class="retro-card p-4 text-center">
+                  <div class="text-3xl mb-2">♿</div>
+                  <div
+                    class="retro-font text-sm neon-glow"
+                    style="color: var(--neon-pink)"
+                  >
+                    PRIORIDAD
+                  </div>
+                  <div class="text-xs" style="color: #b8b8ff">
+                    Accesibilidad
+                  </div>
+                </div>
+                <div class="retro-card p-4 text-center">
+                  <div class="text-3xl mb-2">⚡</div>
+                  <div
+                    class="retro-font text-sm neon-glow"
+                    style="color: var(--neon-yellow)"
+                  >
+                    MÉTODO
+                  </div>
+                  <div class="text-xs" style="color: #b8b8ff">
+                    Mejores prácticas
+                  </div>
+                </div>
+                <div class="retro-card p-4 text-center">
+                  <div class="text-3xl mb-2">🎨</div>
+                  <div
+                    class="retro-font text-sm neon-glow"
+                    style="color: var(--neon-purple)"
+                  >
+                    ARTE
+                  </div>
+                  <div class="text-xs" style="color: #b8b8ff">
+                    Diseño digital
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 retro-grid">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-bold text-center mb-12 vaporwave-title neon-glow vaporwave-text"
+        >
+          SKILLS.JSON
+        </h2>
+
+        <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div class="retro-card p-8 rounded-xl">
+            <h3
+              class="text-2xl font-bold mb-6 retro-font neon-glow"
+              style="color: var(--neon-pink)"
+            >
+              BACKEND_STACK
+            </h3>
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-cyan)">Python</span>
+                  <span style="color: var(--neon-pink)">95%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 95%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-cyan)">Java</span>
+                  <span style="color: var(--neon-pink)">90%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-cyan)">SQL</span>
+                  <span style="color: var(--neon-pink)">88%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 88%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-cyan)">REST APIs</span>
+                  <span style="color: var(--neon-pink)">92%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="retro-card p-8 rounded-xl">
+            <h3
+              class="text-2xl font-bold mb-6 retro-font neon-glow"
+              style="color: var(--neon-cyan)"
+            >
+              FRONTEND_TOOLS
+            </h3>
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-pink)">React</span>
+                  <span style="color: var(--neon-cyan)">85%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-pink)">Supabase</span>
+                  <span style="color: var(--neon-cyan)">80%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-pink)">Figma</span>
+                  <span style="color: var(--neon-cyan)">87%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 87%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-pink)">Blender 3D</span>
+                  <span style="color: var(--neon-cyan)">88%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 88%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 retro-font">
+                  <span style="color: var(--neon-pink)">Digital Design</span>
+                  <span style="color: var(--neon-cyan)">90%</span>
+                </div>
+                <div class="bg-gray-800 rounded-full h-2">
+                  <div class="skill-bar rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 scanlines">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-bold text-center mb-12 vaporwave-title neon-glow vaporwave-text"
+        >
+          EXPERIENCE.LOG
+        </h2>
+
+        <div class="max-w-4xl mx-auto space-y-8">
+          <div class="retro-card p-6 rounded-xl">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3
+                  class="text-xl font-bold retro-font neon-glow"
+                  style="color: var(--neon-pink)"
+                >
+                  PROJECT MANAGER / DEVELOPER
+                </h3>
+                <h4 class="text-lg" style="color: var(--neon-cyan)">
+                  Omicron Transformación Digital
+                </h4>
+              </div>
+              <span
+                class="retro-font text-sm px-3 py-1 rounded-full neon-box"
+                style="color: var(--neon-yellow)"
+                >2024 - ACTUAL</span
+              >
+            </div>
+            <ul class="space-y-2 text-sm" style="color: #e0e0ff">
+              <li>• Coordinación de equipos multidisciplinarios</li>
+              <li>• Diseño y entrega de plataformas web</li>
+              <li>• Supervisión técnica de herramientas educativas</li>
+            </ul>
+          </div>
+
+          <div class="retro-card p-6 rounded-xl">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3
+                  class="text-xl font-bold retro-font neon-glow"
+                  style="color: var(--neon-cyan)"
+                >
+                  COMUNICACIÓN ORGANIZACIONAL
+                </h3>
+                <h4 class="text-lg" style="color: var(--neon-pink)">
+                  Cave Electromecánica SA de CV
+                </h4>
+              </div>
+              <span
+                class="retro-font text-sm px-3 py-1 rounded-full neon-box"
+                style="color: var(--neon-purple)"
+                >2022 - 2024</span
+              >
+            </div>
+            <ul class="space-y-2 text-sm" style="color: #e0e0ff">
+              <li>• Estrategia de comunicación interna/externa</li>
+              <li>• Diseño de identidad visual</li>
+              <li>• Gestión de contenido digital</li>
+            </ul>
+          </div>
+
+          <div class="retro-card p-6 rounded-xl">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3
+                  class="text-xl font-bold retro-font neon-glow"
+                  style="color: var(--neon-yellow)"
+                >
+                  ATENCIÓN CIUDADANA
+                </h3>
+                <h4 class="text-lg" style="color: var(--neon-cyan)">
+                  Alcaldía Álvaro Obregón
+                </h4>
+              </div>
+              <span
+                class="retro-font text-sm px-3 py-1 rounded-full neon-box"
+                style="color: var(--neon-pink)"
+                >2018 - 2021</span
+              >
+            </div>
+            <ul class="space-y-2 text-sm" style="color: #e0e0ff">
+              <li>• Apoyo directo a poblaciones vulnerables</li>
+              <li>• Gestión de programas sociales</li>
+              <li>• Campañas institucionales</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 retro-grid">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-bold text-center mb-12 vaporwave-title neon-glow vaporwave-text"
+        >
+          PROJECTS.EXE
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="retro-card rounded-xl overflow-hidden hover:scale-105 transition-transform"
+          >
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 vaporwave-gradient rounded-lg flex items-center justify-center mr-4 neon-glow"
+                >
+                  <span class="text-2xl">🚀</span>
+                </div>
+                <div>
+                  <h3
+                    class="text-lg font-bold retro-font neon-glow"
+                    style="color: var(--neon-pink)"
+                  >
+                    API ESCALABLE
+                  </h3>
+                  <p class="text-sm retro-font" style="color: var(--neon-cyan)">
+                    Python + PostgreSQL
+                  </p>
+                </div>
+              </div>
+              <p class="text-sm mb-4" style="color: #e0e0ff">
+                Sistema backend robusto para aplicación con 100K+ usuarios
+                activos
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-pink)"
+                  >PYTHON</span
+                >
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-cyan)"
+                  >POSTGRESQL</span
+                >
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-yellow)"
+                  >DOCKER</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="retro-card rounded-xl overflow-hidden hover:scale-105 transition-transform"
+          >
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 vaporwave-gradient rounded-lg flex items-center justify-center mr-4 neon-glow"
+                >
+                  <span class="text-2xl">🌐</span>
+                </div>
+                <div>
+                  <h3
+                    class="text-lg font-bold retro-font neon-glow"
+                    style="color: var(--neon-cyan)"
+                  >
+                    PLATAFORMA GOV
+                  </h3>
+                  <p class="text-sm retro-font" style="color: var(--neon-pink)">
+                    Java + React
+                  </p>
+                </div>
+              </div>
+              <p class="text-sm mb-4" style="color: #e0e0ff">
+                Portal ciudadano enfocado en accesibilidad web (WCAG 2.1)
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-yellow)"
+                  >JAVA</span
+                >
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-cyan)"
+                  >REACT</span
+                >
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-pink)"
+                  >WCAG</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="retro-card rounded-xl overflow-hidden hover:scale-105 transition-transform"
+          >
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 vaporwave-gradient rounded-lg flex items-center justify-center mr-4 neon-glow"
+                >
+                  <span class="text-2xl">🎨</span>
+                </div>
+                <div>
+                  <h3
+                    class="text-lg font-bold retro-font neon-glow"
+                    style="color: var(--neon-purple)"
+                  >
+                    ARTE DIGITAL
+                  </h3>
+                  <p
+                    class="text-sm retro-font"
+                    style="color: var(--neon-yellow)"
+                  >
+                    Supabase + React
+                  </p>
+                </div>
+              </div>
+              <p class="text-sm mb-4" style="color: #e0e0ff">
+                Plataforma colaborativa para artistas 3D con galería interactiva
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-purple)"
+                  >BLENDER</span
+                >
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-cyan)"
+                  >REACT</span
+                >
+                <span
+                  class="px-2 py-1 text-xs retro-font rounded neon-box"
+                  style="color: var(--neon-pink)"
+                  >3D ART</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 scanlines">
+      <div class="container mx-auto px-6 text-center">
+        <h2
+          class="text-4xl font-bold mb-8 vaporwave-title neon-glow vaporwave-text"
+        >
+          CONNECT.EXE
+        </h2>
+        <p class="text-xl mb-12 max-w-2xl mx-auto" style="color: #e0e0ff">
+          Disponible para proyectos que prioricen la
+          <span class="neon-glow" style="color: var(--neon-pink)"
+            >accesibilidad</span
+          >,
+          <span class="neon-glow" style="color: var(--neon-cyan)"
+            >diversidad</span
+          >
+          y
+          <span class="neon-glow" style="color: var(--neon-yellow)"
+            >mejores prácticas</span
+          >.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="retro-card p-6 rounded-xl pulse-neon">
+            <div class="text-4xl mb-4">📧</div>
+            <h3
+              class="font-bold mb-2 retro-font neon-glow"
+              style="color: var(--neon-pink)"
+            >
+              EMAIL
+            </h3>
+            <p class="text-sm" style="color: #e0e0ff">
+              zukuntwellefanzine@gmail.com
+            </p>
+          </div>
+
+          <div class="retro-card p-6 rounded-xl">
+            <div class="text-4xl mb-4">📱</div>
+            <h3
+              class="font-bold mb-2 retro-font neon-glow"
+              style="color: var(--neon-cyan)"
+            >
+              PHONE
+            </h3>
+            <p class="text-sm" style="color: #e0e0ff">+52 5610677516</p>
+          </div>
+
+          <div class="retro-card p-6 rounded-xl">
+            <div class="text-4xl mb-4">💻</div>
+            <h3
+              class="font-bold mb-2 retro-font neon-glow"
+              style="color: var(--neon-yellow)"
+            >
+              GITHUB
+            </h3>
+            <p class="text-sm" style="color: #e0e0ff">zukunftwellefanzine</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <button
+            class="retro-button px-8 py-4 rounded-lg font-bold retro-font text-white"
+          >
+            💌 ENVIAR EMAIL
+          </button>
+          <button
+            class="retro-button px-8 py-4 rounded-lg font-bold retro-font text-white"
+          >
+            🔍 VER REPOS
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t-2" style="border-color: var(--neon-cyan)">
+      <div class="container mx-auto px-6 text-center">
+        <div class="flex items-center justify-center space-x-3 mb-4">
+          <div
+            class="w-8 h-8 vaporwave-gradient rounded-full flex items-center justify-center neon-glow"
+          >
+            <span class="text-black font-bold text-sm retro-font">AB</span>
+          </div>
+          <span class="text-lg font-bold retro-font neon-glow vaporwave-text"
+            >ALEJANDRA_BARCENA.EXE</span
+          >
+        </div>
+        <p class="retro-font mb-4" style="color: var(--neon-cyan)">
+          VAPORWAVE DEVELOPER | 3D DIGITAL ARTIST | BLENDER SPECIALIST
+        </p>
+        <p class="text-sm retro-font" style="color: #b8b8ff">
+          &copy; 2024 Coded with 💜 and neon dreams
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Create floating shapes
+      function createFloatingShapes() {
+        const shapesContainer = document.getElementById("floating-shapes");
+        const shapes = ["triangle", "circle", "square"];
+        for (let i = 0; i < 15; i++) {
+          const shape = document.createElement("div");
+          const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+          shape.className = `shape ${shapeType}`;
+          shape.style.left = Math.random() * 100 + "%";
+          shape.style.animationDuration = Math.random() * 10 + 10 + "s";
+          shape.style.animationDelay = Math.random() * 5 + "s";
+          shapesContainer.appendChild(shape);
+        }
+      }
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+      // Button interactions
+      document.querySelectorAll(".retro-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          const buttonText = this.textContent.trim();
+          if (
+            buttonText.includes("EXPLORAR") ||
+            buttonText.includes("PROYECTOS")
+          ) {
+            document.getElementById("projects").scrollIntoView({
+              behavior: "smooth",
+            });
+          } else if (
+            buttonText.includes("CONTACTAR") ||
+            buttonText.includes("EMAIL")
+          ) {
+            window.location.href = "mailto:zukuntwellefanzine@gmail.com";
+          } else if (buttonText.includes("REPOS")) {
+            window.open("https://github.com/zukunftwellefanzine", "_blank");
+          }
+        });
+      });
+      // Initialize effects
+      document.addEventListener("DOMContentLoaded", function () {
+        createFloatingShapes();
+      });
+      // Parallax effect for hero section
+      window.addEventListener("scroll", function () {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector(".retro-grid");
+        if (parallax) {
+          const speed = scrolled * 0.5;
+          parallax.style.transform = `translateY(${speed}px)`;
+        }
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'97cb4eb3734c64b0',t:'MTc1NzQ2OTM3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
